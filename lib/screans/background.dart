@@ -9,6 +9,7 @@ class background extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
+        
         Container(
           color: Color(0xFFe5e5e5),
           height: double.infinity,
@@ -65,7 +66,6 @@ class background extends StatelessWidget {
                     ),
                   ),
                 ),
- 
               ],
             ),
           ),
