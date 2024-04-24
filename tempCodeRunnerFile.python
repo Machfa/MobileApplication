@@ -1,0 +1,19 @@
+import matplotlib.pyplot as plt
+
+# إنشاء الرسم البياني
+plt.figure()
+
+# رسم محور x
+plt.axhline(y=0, color='black', linewidth=1)
+plt.text(0.98, -0.1, 'x', fontsize=12, ha='right', va='top')
+
+# رسم محور y
+plt.axvline(x=0, color='black', linewidth=1)
+plt.text(-0.1, 0.98, 'y', fontsize=12, ha='right', va='top')
+
+# تعيين حدود المحور
+plt.xlim(-1, 1)
+plt.ylim(-1, 1)
+
+# عرض الرسم البياني
+plt.show()
