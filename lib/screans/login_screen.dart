@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:machfa_app/screans/Search_Page.dart';
 import 'package:machfa_app/screans/background.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:machfa_app/screans/sign_up_screen.dart';
@@ -183,7 +184,14 @@ forgetpassword(context) {
 loginbutton(context) {
   double screenWidth = MediaQuery.of(context).size.width;
   return ElevatedButton(
-    onPressed: () {},
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SearchScreen(),
+        ),
+      );
+    },
     style: ButtonStyle(
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
