@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// TODO: Adjust a variable with this class bcs this class was copied from another one
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -94,7 +93,7 @@ class HistoryPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'History',
+                  'Favourite Doctor',
                   style: GoogleFonts.inter(
                     textStyle: TextStyle(
                       fontSize: 23.0,
@@ -145,7 +144,7 @@ class HistoryPage extends StatelessWidget {
               left: (24 / 428) * screenWidth,
             ),
             child: Text(
-              'Consult My Previous Medical Visit',
+              'List of your Favourite Doctor Specialist',
               style: GoogleFonts.inter(
                 textStyle: const TextStyle(),
               ),
@@ -167,7 +166,7 @@ class HistoryPage extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
-                        color: const Color(0xFF00B7F3),
+                        color: const Color.fromRGBO(169, 169, 169, 1),
                       ),
                     ),
                     child: Row(
@@ -179,12 +178,13 @@ class HistoryPage extends StatelessWidget {
                                 (100 / 428) * MediaQuery.of(context).size.width,
                             width:
                                 (100 / 428) * MediaQuery.of(context).size.width,
-                            child: CircleAvatar(
-                              radius: ((100 / 428) *
-                                      MediaQuery.of(context).size.width) /
-                                  2,
-                              backgroundColor: Colors.white,
-                              backgroundImage: NetworkImage(doctors[index][1]),
+                            child: CircleAvatarWithStatus(
+                              statusColor: doctors[index][2] == true.toString()
+                                  ? const Color(0xFF008000)
+                                  : Colors.transparent,
+                              size: (100 / 428) *
+                                  MediaQuery.of(context).size.width,
+                              imageUrl: doctors[index][1],
                             ),
                           ),
                         ),
@@ -210,8 +210,7 @@ class HistoryPage extends StatelessWidget {
                             Row(
                               children: [
                                 Image.asset(
-                                  'lib/icons/availableDoctors/star.png',
-                                ),
+                                    'lib/icons/availableDoctors/star.png'),
                                 const SizedBox(
                                   width: 5,
                                 ),
@@ -248,7 +247,8 @@ class HistoryPage extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                Image.asset('lib/icons/history/time-sand.png'),
+                                Image.asset(
+                                    'lib/icons/availableDoctors/running.png'),
                                 const SizedBox(
                                   width: 5,
                                 ),
@@ -265,10 +265,23 @@ class HistoryPage extends StatelessWidget {
                             ),
                             Expanded(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  SizedBox(
-                                    width: (157 / 392.72) * screenWidth,
+                                  Text(
+                                    doctors[index][6],
+                                    style: GoogleFonts.inter(
+                                      textStyle: TextStyle(
+                                        color: const Color.fromRGBO(
+                                            255, 0, 0, 0.87),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: (18 / 926) *
+                                            MediaQuery.of(context).size.height,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 65,
                                   ),
                                   TextButton(
                                     style: ButtonStyle(
@@ -282,7 +295,7 @@ class HistoryPage extends StatelessWidget {
                                           BorderSide.none),
                                     ),
                                     onPressed: () {
-                                      // TODO: PUSH THE HISTORY MEDICAL WITH SPECIFIC DOCTOR
+                                      // TODO: PUSH THE PROFILE OF THE DOCTOR
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -290,21 +303,21 @@ class HistoryPage extends StatelessWidget {
                                           Radius.circular(5),
                                         ),
                                         border: Border.all(
-                                          color: const Color(0xFF00B7F3),
+                                          color: const Color(0xFFA9A9A9),
                                         ),
-                                        color: Colors.transparent,
+                                        color: const Color(0xFF1ABFB5),
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
-                                          vertical: 2.0,
-                                          horizontal: 7,
+                                          vertical: 5.0,
+                                          horizontal: 9,
                                         ),
                                         child: Text(
-                                          'Details',
+                                          'Book',
                                           style: GoogleFonts.inter(
                                             textStyle: TextStyle(
-                                              color: const Color(0xFF1ABFB5),
-                                              fontSize: (15 / 926) *
+                                              color: const Color(0xFFF2F2F2),
+                                              fontSize: (13 / 926) *
                                                   MediaQuery.of(context)
                                                       .size
                                                       .height,
@@ -329,6 +342,46 @@ class HistoryPage extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class CircleAvatarWithStatus extends StatelessWidget {
+  final String imageUrl;
+  final Color statusColor;
+  final double size;
+
+  const CircleAvatarWithStatus({
+    super.key,
+    required this.imageUrl,
+    required this.statusColor,
+    required this.size,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.bottomRight,
+      children: [
+        CircleAvatar(
+          radius: size / 2,
+          backgroundColor: Colors.white,
+          backgroundImage:
+              NetworkImage(imageUrl), // Load network image using NetworkImage
+        ),
+        Container(
+          width: size / 4.5,
+          height: size / 4.5,
+          decoration: BoxDecoration(
+            color: statusColor,
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: Colors.white,
+              width: 1.0,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

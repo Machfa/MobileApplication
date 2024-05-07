@@ -110,7 +110,7 @@ class DoctorDetails extends StatelessWidget {
               onPressed: () {},
             ),
             SizedBox(
-              width: (45 / 384) * MediaQuery.of(context).size.width,
+              width: (60 / 384) * MediaQuery.of(context).size.width,
             ),
             Text(
               '2000 DA',
