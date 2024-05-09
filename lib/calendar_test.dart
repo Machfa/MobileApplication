@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       // home: HomePage(
       //   backgroundColor: const Color.fromARGB(255, 229, 229, 229),
       // ),
-      home: HomePage(),
+      home: AvailableAppointmentCalendar(),
 
       debugShowCheckedModeBanner: false,
     );
