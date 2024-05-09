@@ -36,7 +36,7 @@ class PrescriptionHistory extends StatefulWidget {
 }
 
 class _PrescriptionHistoryState extends State<PrescriptionHistory> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
   late PageController _pageController;
   double _currentPage = 0;
 
@@ -120,7 +120,7 @@ class _PrescriptionHistoryState extends State<PrescriptionHistory> {
           ),
           SizedBox(
             height: double.maxFinite, // Adjust height as needed
-            child: ListView.builder(
+            child: PageView.builder(
               controller: _pageController,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:machfa/AppointmentProcess/available_appointment_calendar.dart';
-import 'package:machfa/doctorProfile/doctor_profil.dart';
-import 'package:machfa/historyPage/history_page.dart';
 import 'package:machfa/homePage/home_page.dart';
 
 void main() {
