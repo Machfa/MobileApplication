@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:machfa_app/global_variabes.dart';
 import 'package:machfa_app/screans/background.dart';
 import 'package:machfa_app/screans/login_screen.dart';
 import 'package:machfa_app/screans/verification_screen.dart';
+import 'package:dio/dio.dart';
+import './verification_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -11,6 +14,12 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController _firstName = TextEditingController();
+  TextEditingController _lastName = TextEditingController();
+  TextEditingController _phoneNumber = TextEditingController();
+  TextEditingController _email = TextEditingController();
+  TextEditingController _password1 = TextEditingController();
+  TextEditingController _password2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,7 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Column(
                           children: [
                             SizedBox(
-                              height: screenHeight * 0.14,
+                              height: screenHeight * 0.12,
                             ),
                             const Text(
                               'Welcome on board ',
@@ -60,7 +69,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: screenHeight * 0.08,
+                        height: screenHeight * 0.05,
                       ),
                       //////////////////////////////////////////////////////////
                       Column(
@@ -78,9 +87,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ],
                             ),
                             child: TextField(
+                              controller: _firstName,
                               decoration: InputDecoration(
                                 hintText:
-                                    "Enter your full name", //you can use "labletext"
+                                    "Enter your first name", //you can use "labletext"
                                 contentPadding: EdgeInsets.symmetric(
                                   horizontal: screenWidth * 0.05,
                                 ),
@@ -113,6 +123,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ],
                             ),
                             child: TextField(
+                              controller: _lastName,
+                              decoration: InputDecoration(
+                                hintText:
+                                    "Enter your last name", //you can use "labletext"
+                                contentPadding: EdgeInsets.symmetric(
+                                  horizontal: screenWidth * 0.05,
+                                ),
+                                hintStyle: TextStyle(
+                                  fontSize: 16,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(200),
+                                  borderSide: BorderSide
+                                      .none, //aftter cliq "focuseborder"
+                                ),
+                                fillColor: Colors.white,
+                                filled: true,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: screenHeight * 0.02,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(200),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 5,
+                                  spreadRadius: -10,
+                                  offset: Offset(0, 15),
+                                ),
+                              ],
+                            ),
+                            child: TextField(
+                              controller: _phoneNumber,
                               maxLength: 10,
                               buildCounter: (BuildContext context,
                                       {required int currentLength,
@@ -155,6 +202,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ],
                             ),
                             child: TextField(
+                              controller: _email,
                               decoration: InputDecoration(
                                 hintText:
                                     "Enter your email", //you can use "labletext"
@@ -190,6 +238,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ],
                             ),
                             child: TextField(
+                              controller: _password1,
                               decoration: InputDecoration(
                                 hintText:
                                     "Enter password", //you can use "labletext"
@@ -225,6 +274,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ],
                             ),
                             child: TextField(
+                              controller: _password2,
                               decoration: InputDecoration(
                                 hintText:
                                     "Confirme password", //you can use "labletext"
@@ -247,16 +297,52 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ],
                       ),
                       SizedBox(
-                        height: screenHeight * 0.07,
+                        height: screenHeight * 0.05,
                       ),
                       //////////////////////////////////////////////////////////
                       ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => VerificationScreen()),
-                          );
+                        onPressed: () async {
+                          firstName = _firstName.text;
+                          lastName = _lastName.text;
+                          email = _email.text;
+                          String password1 = _password1.text;
+                          String password2 = _password1.text;
+                          phoneNumber = _phoneNumber.text;
+                          try {
+                            //you need to verify if password1==password2 and do the rest
+                            var response = await Dio().post(
+                                'http://192.168.232.191:4000/user/register',
+                                data: {
+                                  'firstName': firstName,
+                                  'lastName': lastName,
+                                  'email': email,
+                                  'role': 'USER',
+                                  'password': password1,
+                                  'phoneNumber': phoneNumber
+                                });
+                            var response1 = await Dio().post(
+                                'http://192.168.232.191:4000/otp',
+                                data: {'email': email});
+                            print('otp sent');
+                            print(response.statusCode);
+                            print(response1.statusCode);
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => VerificationScreen()),
+                            );
+                            //success go to the next page
+                          } catch (err) {
+                            print('error 1');
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                    'Login failed. Please check your credentials.'),
+                              ),
+                            );
+                            //error thrown
+                          }
                         },
                         style: ButtonStyle(
                           shape:
@@ -289,7 +375,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                           TextButton(
-                            onPressed: () {
+                            onPressed: () async {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

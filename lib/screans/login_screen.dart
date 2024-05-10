@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:machfa_app/global_variabes.dart';
+import 'package:machfa_app/screans/ForgetPassword_screen.dart';
 import 'package:machfa_app/screans/Search_Page.dart';
 import 'package:machfa_app/screans/background.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:machfa_app/screans/sign_up_screen.dart';
+import 'package:dio/dio.dart';
 
 class loginScrean extends StatefulWidget {
   const loginScrean({super.key});
@@ -88,6 +91,8 @@ LoginImage(context) {
   );
 }
 
+TextEditingController _email = TextEditingController();
+TextEditingController _password = TextEditingController();
 inputField(context) {
   double screenWidth = MediaQuery.of(context).size.width;
   return Column(
@@ -105,6 +110,7 @@ inputField(context) {
           ],
         ),
         child: TextField(
+          controller: _email,
           decoration: InputDecoration(
             hintText: "Email or Phone number", //you can use "labletext"
             contentPadding: EdgeInsets.symmetric(
@@ -142,6 +148,7 @@ inputField(context) {
           ],
         ),
         child: TextField(
+          controller: _password,
           decoration: InputDecoration(
             hintText: "Enter password",
             contentPadding: EdgeInsets.symmetric(
@@ -165,7 +172,14 @@ inputField(context) {
 
 forgetpassword(context) {
   return TextButton(
-    onPressed: () {},
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ForgetPassword(),
+        ),
+      );
+    },
     style: ButtonStyle(
       overlayColor: MaterialStateProperty.all(Color(0xFFe5e5e5)),
       //overlayColor: MaterialStatePropertyAll(Colors.grey),
@@ -184,13 +198,44 @@ forgetpassword(context) {
 loginbutton(context) {
   double screenWidth = MediaQuery.of(context).size.width;
   return ElevatedButton(
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => SearchScreen(),
-        ),
-      );
+    onPressed: () async {
+      email = _email.text;
+      password = _password.text;
+
+      try {
+        // Send login request
+        var response = await Dio().post(
+          'http://192.168.232.191:4000/user/login',
+          data: {'email': email, 'password': password},
+        );
+
+        print(response.statusCode); // Print response status code for debugging
+
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          // Login successful, navigate to next screen
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SearchScreen(),
+            ),
+          );
+        } else {
+          // Show error message
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Login failed. Please check your credentials.'),
+            ),
+          );
+        }
+      } catch (err) {
+        // Handle Dio errors
+        print('Dio Error: $err');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Login failed. Please check your credentials.'),
+          ),
+        );
+      }
     },
     style: ButtonStyle(
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(

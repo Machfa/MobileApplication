@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:machfa_app/screans/Filter_Page.dart';
+import 'package:machfa_app/screans/Slash_screen.dart';
 import 'package:machfa_app/screans/login_screen.dart';
 
 void main() {
@@ -17,6 +19,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
         ),
-        home: const loginScrean());
+        home: const FilterPage());
   }
 }

@@ -1,8 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:machfa_app/global_variabes.dart';
 import 'package:machfa_app/screans/background.dart';
+import 'package:dio/dio.dart';
 
-// ignore: camel_case_types
 class VerificationScreen extends StatefulWidget {
   const VerificationScreen({Key? key}) : super(key: key);
 
@@ -11,7 +13,10 @@ class VerificationScreen extends StatefulWidget {
 }
 
 class _VerificationScreenState extends State<VerificationScreen> {
-  bool? first, last;
+  TextEditingController _first = TextEditingController();
+  TextEditingController _second = TextEditingController();
+  TextEditingController _third = TextEditingController();
+  TextEditingController _fourth = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +62,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                               Text(
                                 'To ensure the security of your account, please provide the 4-digit code sent to +213 780 ** ** 00. This code was sent to you via SMS.',
                                 style: TextStyle(
-                                  letterSpacing:
-                                      1.0, // Adjust the letter spacing here
+                                  letterSpacing: 1.0,
                                   fontSize: 15,
                                 ),
                                 textAlign: TextAlign.center,
@@ -67,8 +71,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                               Text(
                                 'To ensure the security of your account, please provide the 4-digit code sent to +213 780 ** ** 00. This code was sent to you via SMS.',
                                 style: TextStyle(
-                                  letterSpacing:
-                                      2.0, // Adjust the letter spacing here
+                                  letterSpacing: 2.0,
                                   fontSize: 15,
                                 ),
                                 textAlign: TextAlign.center,
@@ -92,11 +95,10 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              TextFieldotp(context, first = true, last = false),
-                              TextFieldotp(
-                                  context, first = false, last = false),
-                              TextFieldotp(context, false, last = false),
-                              TextFieldotp(context, first = false, last = true),
+                              TextFieldotp(_first, context, true, false),
+                              TextFieldotp(_second, context, false, false),
+                              TextFieldotp(_third, context, false, false),
+                              TextFieldotp(_fourth, context, false, true),
                             ],
                           ),
                         ),
@@ -104,18 +106,37 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           height: screenHeight * 0.02,
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            String otp =
+                                _first.text + _second.text + _third.text + _fourth.text;
+                            try { 
+                              print(otp);
+                              var response = await Dio().post(
+                                'http://192.168.232.191:4000/otp/verify',
+                                data: {'email': email, "otp": otp},
+                              );
+                              if (response.data['validateOTP'] == true) {
+                                print('Verification successful');
+                                // Navigate to the next screen or perform any other actions upon successful verification
+                              } else {
+                                print('Verification failed');
+                                // Handle verification failure, e.g., show error message to the user
+                              }
+                            } catch (error) {
+                              print('Error occurred during verification');
+                              // Handle other types of errors, e.g., network error
+                            }
+                          },
                           style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
                             fixedSize: MaterialStateProperty.all<Size>(
                                 Size(screenWidth * 0.9, 64)),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Color(0xFF1ABFB5)),
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Color(0xFF1ABFB5)),
                           ),
                           child: Text(
                             'Verify',
@@ -188,52 +209,58 @@ class _VerificationScreenState extends State<VerificationScreen> {
   }
 }
 
-// ignore: non_constant_identifier_names
-TextFieldotp(
-  context,
-  bool first,
-  last,
-) {
-  double screenHeight = MediaQuery.of(context).size.height;
-  double screenWidth = MediaQuery.of(context).size.width;
-  return Container(
-    height: screenHeight * 0.08,
-    width: screenWidth * 0.12,
-    child: TextField(
-      textAlign: TextAlign.center,
-      autofocus:
-          true, //Automatically focuses the first TextField when the screen loads.
-      onChanged: (value) {
-        // Triggers a callback whenever the text in the TextField changes. It's used to handle navigation between text fields based on the length of the input.
-        if (value.length == 1 && last == false) {
-          FocusScope.of(context).nextFocus();
-        }
-        if (value.length == 0 && first == false) {
-          FocusScope.of(context).previousFocus();
-        }
-      },
-      showCursor: false, //Hides the cursor in the TextField.
-      readOnly: false, //Allows the user to edit the text.
-      style: TextStyle(
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-      ),
-      keyboardType: TextInputType.number,
-      maxLength: 1,
-      decoration: InputDecoration(
+class TextFieldotp extends StatelessWidget {
+  final TextEditingController controller;
+  final BuildContext context;
+  final bool first;
+  final bool last;
+
+  const TextFieldotp(
+      this.controller, this.context, this.first, this.last, {Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    return Container(
+      height: screenHeight * 0.08,
+      width: screenWidth * 0.12,
+      child: TextField(
+        controller: controller,
+        textAlign: TextAlign.center,
+        autofocus: true,
+        onChanged: (value) {
+          if (value.length == 1 && last == false) {
+            FocusScope.of(context).nextFocus();
+          }
+          if (value.length == 0 && first == false) {
+            FocusScope.of(context).previousFocus();
+          }
+        },
+        showCursor: false,
+        readOnly: false,
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+        keyboardType: TextInputType.number,
+        maxLength: 1,
+        decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 0.015),
-          counter:
-              Offstage(), //Hides the character count display.يخفي عرض عداد الأحرف.
+          counter: Offstage(),
           enabledBorder: OutlineInputBorder(
-              // Defines the border when the TextField is not focused.
-              borderSide: BorderSide(width: 2, color: Colors.black12),
-              borderRadius: BorderRadius.circular(6)),
+            borderSide: BorderSide(width: 2, color: Colors.black12),
+            borderRadius: BorderRadius.circular(6),
+          ),
           focusedBorder: OutlineInputBorder(
-              // Defines the border when the TextField is in focus. It has a purple color and a width of 2 pixels.
-              borderSide: BorderSide(width: 2, color: Color(0xFF1ABFB5)),
-              borderRadius: BorderRadius.circular(6)),
-          fillColor: Colors.white, // Change the color as needed
-          filled: true),
-    ),
-  );
+            borderSide: BorderSide(width: 2, color: Color(0xFF1ABFB5)),
+            borderRadius: BorderRadius.circular(6),
+          ),
+          fillColor: Colors.white,
+          filled: true,
+        ),
+      ),
+    );
+  }
 }

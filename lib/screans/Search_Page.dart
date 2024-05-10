@@ -33,10 +33,11 @@ class _Search_screenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
-    return SafeArea(
+    return  SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xFFe5e5e5),
         appBar: AppBar(
+          elevation: 0,
           backgroundColor: Color(0xFFe5e5e5),
           automaticallyImplyLeading: false, // Remove the back icon
           actions: [
