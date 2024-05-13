@@ -70,20 +70,34 @@ class DoctorDetails extends StatelessWidget {
         SizedBox(
           height: (20 / (79728 / 99)) * MediaQuery.of(context).size.height,
         ),
-        Text(
-          'Dr. SEBA Mohammed',
-          style: GoogleFonts.inter(
-            textStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
+        Row(
+          children: [
+            Text(
+              'Dr. SEBA Mohammed',
+              style: GoogleFonts.inter(
+                textStyle: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: (16 / 392.727) * MediaQuery.of(context).size.width,
+                ),
+              ),
             ),
-          ),
+            SizedBox(
+              width: (40 / 392.727) * MediaQuery.of(context).size.width,
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: Icon(
+                Icons.more_horiz_outlined,
+                size: (30 / 392.727) * MediaQuery.of(context).size.width,
+              ),
+            )
+          ],
         ),
         Text(
           'Cardiologist',
           style: GoogleFonts.inter(
-            textStyle: const TextStyle(
-              fontSize: 14,
+            textStyle: TextStyle(
+              fontSize: (14 / 392.727) * MediaQuery.of(context).size.width,
             ),
           ),
         ),
@@ -103,8 +117,8 @@ class DoctorDetails extends StatelessWidget {
             ),
             IconButton(
               icon: Image.asset(
-                height: 26,
-                width: 26,
+                height: (26 / 392.727) * MediaQuery.of(context).size.width,
+                width: (26 / 392.727) * MediaQuery.of(context).size.width,
                 'lib/icons/doctorInformation/phoneIcon.png',
               ),
               onPressed: () {},
@@ -115,9 +129,9 @@ class DoctorDetails extends StatelessWidget {
             Text(
               '2000 DA',
               style: GoogleFonts.inter(
-                textStyle: const TextStyle(
+                textStyle: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                  fontSize: (18 / 392.727) * MediaQuery.of(context).size.width,
                 ),
               ),
             )

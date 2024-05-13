@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // TODO: Adjust a variable with this class bcs this class was copied from another one
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:machfa/botomNavBar/nav_bar.dart';
 
 class HistoryPage extends StatelessWidget {
   final Color backgroundColor = const Color(0xFFE5E5E5);
@@ -78,7 +79,9 @@ class HistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
+    print(screenHeight);
     return Scaffold(
+      bottomNavigationBar: const NavBar(),
       backgroundColor: backgroundColor,
       appBar: AppBar(
         leadingWidth: screenWidth * (300 / 428),
@@ -97,7 +100,7 @@ class HistoryPage extends StatelessWidget {
                   'History',
                   style: GoogleFonts.inter(
                     textStyle: TextStyle(
-                      fontSize: 23.0,
+                      fontSize: (21.0 / 890.2875) * screenHeight,
                       wordSpacing: -2,
                       fontWeight: FontWeight.bold,
                     ),
@@ -160,7 +163,7 @@ class HistoryPage extends StatelessWidget {
                 return Container(
                   padding: EdgeInsets.symmetric(
                     vertical: 7,
-                    horizontal: (24 / 428) * screenWidth,
+                    horizontal: (23 / 428) * screenWidth,
                   ),
                   child: Container(
                     height: (150 / 428) * MediaQuery.of(context).size.width,

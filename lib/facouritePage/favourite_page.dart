@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-class HistoryPage extends StatelessWidget {
+class FavouritePage extends StatelessWidget {
   final Color backgroundColor = const Color(0xFFE5E5E5);
   final bool bellNotification = true;
   final bool personNotification = true;
@@ -71,12 +71,14 @@ class HistoryPage extends StatelessWidget {
       '2000.00 DA',
     ],
   ];
-  HistoryPage({super.key});
+  FavouritePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
+
+    print(screenHeight);
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -96,7 +98,7 @@ class HistoryPage extends StatelessWidget {
                   'Favourite Doctor',
                   style: GoogleFonts.inter(
                     textStyle: TextStyle(
-                      fontSize: 23.0,
+                      fontSize: (21.0 / 890.2857) * screenHeight,
                       wordSpacing: -2,
                       fontWeight: FontWeight.bold,
                     ),

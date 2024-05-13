@@ -36,6 +36,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
+    // Announcement, for more information, the user have to click on the announce to have information
     final List<String> picItemPath = [
       'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRKWi6TaiI943FA_VlA-34Zkc9AfZibU9TrHsg1Sb2mrFpeIZ8i',
       'https://t3.ftcdn.net/jpg/02/16/47/22/360_F_216472247_cT66WDoS0fp1s3wC7eaykMJNDGVbOBPq.jpg',

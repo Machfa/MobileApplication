@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:machfa/doctorProfile/header/doctor_general_information.dart';
 
 import 'document_row.dart';
+
+// TODO: Adjust the size of components according to the screen of others devices
+// TODO: Download Widget Offest Issue
 
 class PrescriptionHistory extends StatefulWidget {
   final Map<String, List<DocumentRow>> documentType = const {
