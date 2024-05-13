@@ -57,7 +57,7 @@ class SpecialityCategorySection extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: (120 / 926) *
+          height: (140 / 926) *
               MediaQuery.of(context).size.height, // Adjust height as needed
           child: ListView.builder(
             itemBuilder: (context, index) => SafeArea(
@@ -79,8 +79,8 @@ class SpecialityCategorySection extends StatelessWidget {
                     // );
                   },
                   icon: Container(
-                    height: (115 / 926) * MediaQuery.of(context).size.height,
-                    width: (115 / 428) * MediaQuery.of(context).size.width,
+                    height: (120 / 926) * MediaQuery.of(context).size.height,
+                    width: (120 / 428) * MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: const Color(0xFFA9A9A9),
