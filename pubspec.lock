@@ -69,10 +69,17 @@ packages:
     dependency: "direct main"
     description:
       name: dio
+<<<<<<< HEAD
       sha256: "11e40df547d418cc0c4900a9318b26304e665da6fa4755399a9ff9efd09034b5"
       url: "https://pub.dev"
     source: hosted
     version: "5.4.3+1"
+=======
+      sha256: "7d328c4d898a61efc3cd93655a0955858e29a0aa647f0f9e02d59b3bb275e2e8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.6"
+>>>>>>> anissKettroussi
   fake_async:
     dependency: transitive
     description:
@@ -102,6 +109,17 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+<<<<<<< HEAD
+=======
+  flutter_rating_bar:
+    dependency: "direct main"
+    description:
+      name: flutter_rating_bar
+      sha256: d2af03469eac832c591a1eba47c91ecc871fe5708e69967073c043b2d775ed93
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.1"
+>>>>>>> anissKettroussi
   flutter_svg:
     dependency: "direct main"
     description:
@@ -124,7 +142,11 @@ packages:
     source: hosted
     version: "6.2.1"
   http:
+<<<<<<< HEAD
     dependency: transitive
+=======
+    dependency: "direct main"
+>>>>>>> anissKettroussi
     description:
       name: http
       sha256: "761a297c042deedc1ffbb156d6e2af13886bb305c2a343a4d972504cd67dd938"
@@ -140,7 +162,11 @@ packages:
     source: hosted
     version: "4.0.2"
   intl:
+<<<<<<< HEAD
     dependency: "direct main"
+=======
+    dependency: transitive
+>>>>>>> anissKettroussi
     description:
       name: intl
       sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
