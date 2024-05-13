@@ -1,17 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// TODO: Adjust a variable with this class bcs this class was copied from another one
+import 'package:flutter/widgets.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-class HistoryPage extends StatelessWidget {
+class MyAppointment extends StatelessWidget {
   final Color backgroundColor = const Color(0xFFE5E5E5);
   final bool bellNotification = true;
   final bool personNotification = true;
+  // There is three state of appointment
+  // "Confirmed" - "NOT Confirmed" - "Cancelled"
   final List<List<String>> doctors = [
     [
       'Dr. SEBA Mohammed',
       'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      true.toString(),
+      "Confirmed",
       '4.7',
       'Cardiologist',
       '5 min',
@@ -20,7 +23,7 @@ class HistoryPage extends StatelessWidget {
     [
       'Dr. SEBA Mohammed',
       'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      true.toString(),
+      "Confirmed",
       '4.7',
       'Cardiologist',
       '5 min',
@@ -29,7 +32,7 @@ class HistoryPage extends StatelessWidget {
     [
       'Dr. SEBA Mohammed',
       'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      true.toString(),
+      "Cancelled",
       '4.7',
       'Cardiologist',
       '5 min',
@@ -38,7 +41,7 @@ class HistoryPage extends StatelessWidget {
     [
       'Dr. SEBA Mohammed',
       'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      true.toString(),
+      "Confirmed",
       '4.7',
       'Cardiologist',
       '5 min',
@@ -47,7 +50,7 @@ class HistoryPage extends StatelessWidget {
     [
       'Dr. SEBA Mohammed',
       'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      true.toString(),
+      "Confirmed",
       '4.7',
       'Cardiologist',
       '5 min',
@@ -56,7 +59,7 @@ class HistoryPage extends StatelessWidget {
     [
       'Dr. SEBA Mohammed',
       'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      true.toString(),
+      "NOT Confirmed",
       '4.7',
       'Cardiologist',
       '5 min',
@@ -65,14 +68,14 @@ class HistoryPage extends StatelessWidget {
     [
       'Dr. SEBA Mohammed',
       'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      true.toString(),
+      "Confirmed",
       '4.7',
       'Cardiologist',
       '5 min',
       '2000.00 DA',
     ],
   ];
-  HistoryPage({super.key});
+  MyAppointment({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +99,7 @@ class HistoryPage extends StatelessWidget {
                 Text(
                   'History',
                   style: GoogleFonts.inter(
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       fontSize: 23.0,
                       wordSpacing: -2,
                       fontWeight: FontWeight.bold,
@@ -167,7 +170,11 @@ class HistoryPage extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
-                        color: const Color(0xFF00B7F3),
+                        color: doctors[index][2] == "Confirmed"
+                            ? Color(0xFF1ABFB5)
+                            : doctors[index][2] == "NOT Confirmed"
+                                ? Color(0xFFF68C1F)
+                                : Color(0xFFFF0000),
                       ),
                     ),
                     child: Row(
@@ -290,7 +297,13 @@ class HistoryPage extends StatelessWidget {
                                           Radius.circular(5),
                                         ),
                                         border: Border.all(
-                                          color: const Color(0xFF00B7F3),
+                                          color:
+                                              doctors[index][2] == "Confirmed"
+                                                  ? Color(0xFF1ABFB5)
+                                                  : doctors[index][2] ==
+                                                          "NOT Confirmed"
+                                                      ? Color(0xFFF68C1F)
+                                                      : Color(0xFFFF0000),
                                         ),
                                         color: Colors.transparent,
                                       ),
@@ -303,7 +316,13 @@ class HistoryPage extends StatelessWidget {
                                           'Details',
                                           style: GoogleFonts.inter(
                                             textStyle: TextStyle(
-                                              color: const Color(0xFF1ABFB5),
+                                              color: doctors[index][2] ==
+                                                      "Confirmed"
+                                                  ? Color(0xFF1ABFB5)
+                                                  : doctors[index][2] ==
+                                                          "NOT Confirmed"
+                                                      ? Color(0xFFF68C1F)
+                                                      : Color(0xFFFF0000),
                                               fontSize: (15 / 926) *
                                                   MediaQuery.of(context)
                                                       .size

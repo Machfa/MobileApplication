@@ -15,7 +15,7 @@ class DoctorProfilePage extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 229, 229, 229),
       appBar: AppBar(
         title: const Text('Test'),
-      ),
+      ), //TODO: Delete Test Title
       bottomNavigationBar: const NavBar(),
       body: ListView(
         children: [
