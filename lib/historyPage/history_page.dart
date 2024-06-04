@@ -160,177 +160,188 @@ class HistoryPage extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               itemBuilder: (context, index) {
-                return Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 7,
-                    horizontal: (23 / 428) * screenWidth,
-                  ),
-                  child: Container(
-                    height: (150 / 428) * MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        color: const Color(0xFF00B7F3),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            height:
-                                (100 / 428) * MediaQuery.of(context).size.width,
-                            width:
-                                (100 / 428) * MediaQuery.of(context).size.width,
-                            child: CircleAvatar(
-                              radius: ((100 / 428) *
-                                      MediaQuery.of(context).size.width) /
-                                  2,
-                              backgroundColor: Colors.white,
-                              backgroundImage: NetworkImage(doctors[index][1]),
-                            ),
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            Text(
-                              doctors[index][0],
-                              style: GoogleFonts.inter(
-                                textStyle: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: (18 / 926) *
-                                      MediaQuery.of(context).size.height,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 7.0,
-                            ),
-                            Row(
-                              children: [
-                                Image.asset(
-                                  'lib/icons/availableDoctors/star.png',
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  doctors[index][3],
-                                  style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                      fontSize: (17 / 926) *
-                                          MediaQuery.of(context).size.height,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 6,
-                                ),
-                                Image.asset(
-                                    'lib/icons/availableDoctors/dot.png'),
-                                const SizedBox(
-                                  width: 6,
-                                ),
-                                Text(
-                                  doctors[index][4],
-                                  style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                      fontSize: (17 / 926) *
-                                          MediaQuery.of(context).size.height,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 7,
-                            ),
-                            Row(
-                              children: [
-                                Image.asset('lib/icons/history/time-sand.png'),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  doctors[index][5],
-                                  style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                      fontSize: (17 / 926) *
-                                          MediaQuery.of(context).size.height,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Expanded(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  SizedBox(
-                                    width: (157 / 392.72) * screenWidth,
-                                  ),
-                                  TextButton(
-                                    style: ButtonStyle(
-                                      shadowColor:
-                                          const MaterialStatePropertyAll(
-                                        Colors.transparent,
-                                      ),
-                                      overlayColor: MaterialStateProperty.all(
-                                          Colors.transparent),
-                                      side: MaterialStateProperty.all(
-                                          BorderSide.none),
-                                    ),
-                                    onPressed: () {
-                                      // TODO: PUSH THE HISTORY MEDICAL WITH SPECIFIC DOCTOR
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(5),
-                                        ),
-                                        border: Border.all(
-                                          color: const Color(0xFF00B7F3),
-                                        ),
-                                        color: Colors.transparent,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          vertical: 2.0,
-                                          horizontal: 7,
-                                        ),
-                                        child: Text(
-                                          'Details',
-                                          style: GoogleFonts.inter(
-                                            textStyle: TextStyle(
-                                              color: const Color(0xFF1ABFB5),
-                                              fontSize: (15 / 926) *
-                                                  MediaQuery.of(context)
-                                                      .size
-                                                      .height,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                return DoctorCard(
+                  screenWidth: screenWidth,
+                  doctors: doctors,
+                  index: index,
                 );
               },
               itemCount: doctors.length,
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class DoctorCard extends StatelessWidget {
+  const DoctorCard({
+    super.key,
+    required this.screenWidth,
+    required this.doctors,
+    required this.index,
+  });
+  final int index;
+  final double screenWidth;
+  final List<List<String>> doctors;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        vertical: 7,
+        horizontal: (23 / 428) * screenWidth,
+      ),
+      child: Container(
+        height: (150 / 428) * MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: const Color(0xFF00B7F3),
+          ),
+        ),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: (100 / 428) * MediaQuery.of(context).size.width,
+                width: (100 / 428) * MediaQuery.of(context).size.width,
+                child: CircleAvatar(
+                  radius: ((100 / 428) * MediaQuery.of(context).size.width) / 2,
+                  backgroundColor: Colors.white,
+                  backgroundImage: NetworkImage(doctors[index][1]),
+                ),
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 10.0,
+                ),
+                Text(
+                  doctors[index][0],
+                  style: GoogleFonts.inter(
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: (18 / 926) * MediaQuery.of(context).size.height,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 7.0,
+                ),
+                Row(
+                  children: [
+                    Image.asset(
+                      'lib/icons/availableDoctors/star.png',
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      doctors[index][3],
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          fontSize:
+                              (17 / 926) * MediaQuery.of(context).size.height,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 6,
+                    ),
+                    Image.asset('lib/icons/availableDoctors/dot.png'),
+                    const SizedBox(
+                      width: 6,
+                    ),
+                    Text(
+                      doctors[index][4],
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          fontSize:
+                              (17 / 926) * MediaQuery.of(context).size.height,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 7,
+                ),
+                Row(
+                  children: [
+                    Image.asset('lib/icons/history/time-sand.png'),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      doctors[index][5],
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          fontSize:
+                              (17 / 926) * MediaQuery.of(context).size.height,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        width: (157 / 392.72) * screenWidth,
+                      ),
+                      TextButton(
+                        style: ButtonStyle(
+                          shadowColor: const MaterialStatePropertyAll(
+                            Colors.transparent,
+                          ),
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                          side: MaterialStateProperty.all(BorderSide.none),
+                        ),
+                        onPressed: () {
+                          // TODO: PUSH THE HISTORY MEDICAL WITH SPECIFIC DOCTOR
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(5),
+                            ),
+                            border: Border.all(
+                              color: const Color(0xFF00B7F3),
+                            ),
+                            color: Colors.transparent,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 2.0,
+                              horizontal: 7,
+                            ),
+                            child: Text(
+                              'Details',
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                  color: const Color(0xFF1ABFB5),
+                                  fontSize: (15 / 926) *
+                                      MediaQuery.of(context).size.height,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
