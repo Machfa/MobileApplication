@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:machfa/doctorProfile/header/doctor_general_information.dart';
@@ -171,3 +172,28 @@ class _PrescriptionHistoryState extends State<PrescriptionHistory> {
     );
   }
 }
+=======
+import 'package:flutter/material.dart';
+import 'package:machfa/personalInformation/personal_information.dart';
+
+class PrescriptionHistory extends StatefulWidget {
+  const PrescriptionHistory({super.key});
+
+  @override
+  State<PrescriptionHistory> createState() => _PrescriptionHistoryState();
+}
+
+class _PrescriptionHistoryState extends State<PrescriptionHistory> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Prescription History"),
+      ),
+      body: ListView(
+        children: [PersonalIfnormation()],
+      ),
+    );
+  }
+}
+>>>>>>> anissKettroussi
