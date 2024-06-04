@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 import 'package:flutter/material.dart';
+import 'package:machfa/historyPage/history_page.dart';
 import 'package:machfa/myAppointmentList/MyAppointementDetails/appointment_status.dart';
 import 'package:machfa/myAppointmentList/my_appointment_details.dart';
 
@@ -17,15 +18,7 @@ class MyApp extends StatelessWidget {
       // home: HomePage(
       //   backgroundColor: const Color.fromARGB(255, 229, 229, 229),
       // ),
-      home: MyAppointmentDetails(
-        appointment: DateTime(2023, 9, 5, 23, 36),
-        appointmentStatus: AppointmentStatus.cancled(),
-        resheduleButton:
-            AppointmentStatus.cancled().rescheduleActionAvaibility!,
-        cancelButton: AppointmentStatus.cancled().cancelActionAvaibility!,
-        requestRefundButton:
-            AppointmentStatus.cancled().requestRefundActionAvaibility!,
-      ),
+      home: HistoryPage(),
 
       debugShowCheckedModeBanner: false,
     );
