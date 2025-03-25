@@ -2,7 +2,7 @@ Voici un fichier README bien structuré pour ton projet Flutter **Machfa**. Il e
 
 ---
 
-```markdown
+
 # 📱 Machfa - Application Mobile
 
 Machfa est une application mobile développée en **Flutter** dans le cadre d'un projet visant à améliorer l'accessibilité et l'efficacité des soins de santé en Algérie. L'application permet aux patients de prendre rendez-vous avec des médecins, consulter leur historique médical et accéder à des ordonnances numériques sécurisées.
