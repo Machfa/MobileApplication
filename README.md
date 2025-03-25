@@ -1,6 +1,4 @@
-Voici un fichier README bien structuré pour ton projet Flutter **Machfa**. Il explique brièvement le projet, comment le configurer et le lancer. Tu pourras l'adapter selon tes besoins.  
 
----
 
 
 # 📱 Machfa - Application Mobile
