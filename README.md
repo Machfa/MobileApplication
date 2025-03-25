@@ -23,7 +23,6 @@ Machfa est une application mobile développée en **Flutter** dans le cadre d'un
 Avant de commencer, assure-toi d'avoir :
 - [Flutter](https://flutter.dev/docs/get-started/install) installé sur ta machine
 - Un émulateur Android/iOS ou un appareil physique connecté
-- Un compte Firebase configuré pour l'authentification et la base de données en temps réel (si applicable)
 
 ### 📥 Installation
 1. Clone le dépôt Git dans ton répertoire local :
