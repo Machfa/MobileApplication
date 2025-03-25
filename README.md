@@ -36,7 +36,6 @@ Avant de commencer, assure-toi d'avoir :
    flutter pub get
    ```
 
-3. Configure un fichier `.env` si nécessaire (ajoute tes clés API pour Firebase ou d'autres services).
 
 ### ▶️ Exécution
 Lance l'application sur un simulateur ou un appareil physique :
